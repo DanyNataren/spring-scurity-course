@@ -20,7 +20,6 @@ import java.util.Map;
 @RequestMapping("accounts")
 public class AccountsController {
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public Map<String, String> accounts() {
         ///  ... busssines logic
         return Collections.singletonMap("msg","accounts");
