@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /***
  * Project: Spring security course
@@ -34,7 +35,9 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         final var customer = customerFromBD.orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
         final var customerPwd = customer.getPassword();
         if (!passwordEncoder.matches(password, customerPwd)) throw new BadCredentialsException("Invalid credentials");
-        final var authorities = List.of(new SimpleGrantedAuthority(customer.getRole()));
+        final var roles = customer.getRoles();
+        final var authorities = roles.stream().map(r -> new SimpleGrantedAuthority(r.getName()))
+                .collect(Collectors.toList());
         return new UsernamePasswordAuthenticationToken(username, password, authorities);
     }
 

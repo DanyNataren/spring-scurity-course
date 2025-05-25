@@ -7,28 +7,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
-import java.util.List;
 
 /***
  * Project: Spring security course
  * Package: com.danielflores.app_security.entities
  * Created by Kevin Daniel Flores Nataren
- * File created at 05/May/2025 at 14:59
+ * File created at 05/May/2025 at 12:54
  * All rights reserved 2025.
  **/
 
-@Entity(name = "customers")
+@Entity(name = "roles")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class CustomerEntity {
+public class RoleEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
-    private String email;
-    @Column(name = "pwd")
-    private String password;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_customer")
-    private List<RoleEntity> roles;
+    @Column(name = "role_name")
+    private String name;
+    private String description;
+
 }
