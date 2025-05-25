@@ -33,10 +33,8 @@ public class SecurityConfig {
         requestHandler.setCsrfRequestAttributeName("_csrf");
         http.authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/loans/**").hasAuthority("VIEW_LOANS")
-                                .requestMatchers("balances/**").hasAuthority("VIEW_BALANCE")
-                                .requestMatchers("/cards/**").hasAuthority("VIEW_CARDS")
-                                .requestMatchers("/accounts/**").hasAnyAuthority("VIEW_ACCOUNT","VIEW_CARDS")
+                                .requestMatchers("/loans/**", "balances/**").hasRole("USER")
+                                .requestMatchers("/accounts/**", "/cards/**").hasRole("ADMIN")
                         .anyRequest()
                         .permitAll()
                 )
