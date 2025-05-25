@@ -1,5 +1,6 @@
 package com.danielflores.app_security.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import java.util.Map;
 @RequestMapping("accounts")
 public class AccountsController {
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public Map<String, String> accounts() {
         ///  ... busssines logic
         return Collections.singletonMap("msg","accounts");
