@@ -2,6 +2,6 @@ create table customers
 (
     id    bigserial primary key,
     email varchar(50) not null,
-    pwd   varchar(50) not null,
+    pwd   varchar(255) not null,
     rol   varchar(20) not null
 );
